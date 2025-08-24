@@ -11,12 +11,16 @@ function App() {
   const [search, setSearch] = useState(""); // search state
 
   const fetchWords = async () => {
-    const res = await axios.get("https://languagestudyback.onrender.com/api/words")
+    const res = await axios.get("https://languagestudyback.onrender.com/api/words", {
+                headers: { "Cache-Control": "no-cache" }
+              });
     setWords(res.data);
   };
 
   const addWord = async (word) => {
-    const res = await axios.get("https://languagestudyback.onrender.com/api/words");
+    const res = await axios.get("https://languagestudyback.onrender.com/api/words", {
+                    headers: { "Cache-Control": "no-cache" }
+                  });
     setWords([...words, res.data]);
   };
 
