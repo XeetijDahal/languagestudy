@@ -8,7 +8,7 @@ import "./App.css";
 function App() {
   const [words, setWords] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [search, setSearch] = useState(""); // search state
+  const [search, setSearch] = useState(""); 
 
   const fetchWords = async () => {
     const res = await axios.get("https://languagestudyback.onrender.com/api/words", {
@@ -18,7 +18,7 @@ function App() {
   };
 
   const addWord = async (word) => {
-    const res = await axios.get("https://languagestudyback.onrender.com/api/words", {
+    const res = await axios.post("https://languagestudyback.onrender.com/api/words", {
                     headers: { "Cache-Control": "no-cache" }
                   });
     setWords([...words, res.data]);
@@ -28,7 +28,7 @@ function App() {
     fetchWords();
   }, []);
 
-  // Filter words based on search input
+  
   const filteredWords = words.filter(
     (w) =>
       w.english.toLowerCase().includes(search.toLowerCase()) ||

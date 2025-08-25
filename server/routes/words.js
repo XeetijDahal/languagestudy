@@ -2,18 +2,18 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-// Get all words
+
 router.get("/", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM words ORDER BY id ASC");
     res.json(result.rows);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send(err);
   }
 });
 
-// Add a word
+
 router.post("/", async (req, res) => {
   try {
     const { english, nepali, german } = req.body;
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send(err);
   }
 });
 
